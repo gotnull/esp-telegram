@@ -19,21 +19,18 @@
     
     colorPicker.on('color:change', function (color) {
         document.body.style.background = color.hexString;
+        const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
+        Telegram.WebApp.sendData(data);
     });
 
     Telegram.WebApp.ready();
 
-    Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
-        const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
-        Telegram.WebApp.sendData(data);
-    });
-
-    Telegram.WebApp.MainButton.setText('Rainbow').show().onClick(function () {
+    Telegram.WebApp.MainButton.setText('Rainbows').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb, rainbow: true });
         Telegram.WebApp.sendData(data);
     });
 
-    Telegram.WebApp.MainButton.setText('Close').show().onClick(function () {
+    Telegram.WebApp.MainButton.setText('Exit').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
