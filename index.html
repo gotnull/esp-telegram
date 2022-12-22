@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 <script type="text/javascript">
+    Telegram.WebApp.ready();
+
     const colorPicker = new iro.ColorPicker('#picker', {
         borderColor: "#ffffff",
         borderWidth: 1,
@@ -22,8 +24,6 @@
         const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
         Telegram.WebApp.sendData(data);
     });
-
-    Telegram.WebApp.ready();
 
     Telegram.WebApp.MainButton.setText('Rainbows').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb, rainbow: true });
