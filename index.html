@@ -90,6 +90,9 @@
     }
   </style>
   <script type="text/javascript">
+    // Let Telegram WebApp we're ready
+    Telegram.WebApp.ready();
+
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
     var colorPicker = new iro.ColorPicker(".colorPicker", {
@@ -101,24 +104,25 @@
       borderColor: "#fff",
     });
 
-    // handle click events on the swatch
-
+    // Handle click events on the swatch
     var swatchGrid = document.getElementById('swatch-grid');
-
     swatchGrid.addEventListener('click', function(e) {
       var clickTarget = e.target;
       // read data-color attribute
       if (clickTarget.dataset.color) {
         // update the color picker
         colorPicker.color.set(clickTarget.dataset.color);
+        
+        // Update the device
+        const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
+        Telegram.WebApp.sendData(data);
       }
     });
 
-    // update the "selected color" values whenever the color changes
+    // Update the "selected color" values whenever the color changes
     // https://iro.js.org/guide.html#color-picker-events
-
     var values = document.getElementById("values");
-    colorPicker.on(["color:init", "color:change"], function(color){
+    colorPicker.on(["color:init", "color:change"], function(color) {
       // Show the current color in different formats
       // Using the selected color: https://iro.js.org/guide.html#selected-color-api
       values.innerHTML = [
@@ -126,10 +130,13 @@
         "rgb: " + color.rgbString,
         "hsl: " + color.hslString,
       ].join("<br>");
-    });
-      
-    Telegram.WebApp.ready();
 
+      // Update the device
+      const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
+      Telegram.WebApp.sendData(data);
+    });
+    
+    // Render the MainButton for the Telegram WebApp
     Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
