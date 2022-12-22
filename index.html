@@ -1,27 +1,100 @@
-
-<!--
-    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
--->
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>ESP32</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-</head>
-<script type="text/javascript">
-    const colorPicker = new iro.ColorPicker('#picker', {
-        borderColor: "#ffffff",
-        borderWidth: 1,
-        width: Math.round(document.documentElement.clientWidth / 2),
-    });
-    
-    colorPicker.on('color:change', function (color) {
-        document.body.style.background = color.hexString;
-        const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
+  </head>
+  <style>
+    body {
+      color: #fff;
+      background: #171F30;
+      line-height: 150%;
+      font-size: 18px;
+    }
+
+    .wrap {
+      min-height: 100vh;
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      .half {
+        width: 50%;
+        padding: 32px 0;
+      }
+    }
+
+    .readout {
+      margin-top: 32px;
+      line-height: 180%;
+    }
+
+    #values {
+     font-family: monospace;
+      line-height: 150%;
+    }
+
+    .swatchGrid {
+      display: grid;
+      grid-template-columns: repeat(8, 28px);
+      grid-template-rows: repeat(2, 28px);
+      grid-gap: 6px;
+      margin-bottom: 1em;
+    }
+
+    .swatch {
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    a {
+      color: MediumSlateBlue;
+    }
+  </style>
+  <script type="text/javascript">
+    // Create a new color picker instance
+    // https://iro.js.org/guide.html#getting-started
+    var colorPicker = new iro.ColorPicker(".colorPicker", {
+      // color picker options
+      // Option guide: https://iro.js.org/guide.html#color-picker-options
+      width: 280,
+      color: "rgb(255, 0, 0)",
+      borderWidth: 1,
+      borderColor: "#fff",
     });
 
+    // handle click events on the swatch
+
+    var swatchGrid = document.getElementById('swatch-grid');
+
+    swatchGrid.addEventListener('click', function(e) {
+      var clickTarget = e.target;
+      // read data-color attribute
+      if (clickTarget.dataset.color) {
+        // update the color picker
+        colorPicker.color.set(clickTarget.dataset.color);
+      }
+    });
+
+    // update the "selected color" values whenever the color changes
+    // https://iro.js.org/guide.html#color-picker-events
+
+    var values = document.getElementById("values");
+    colorPicker.on(["color:init", "color:change"], function(color){
+      // Show the current color in different formats
+      // Using the selected color: https://iro.js.org/guide.html#selected-color-api
+      values.innerHTML = [
+        "hex: " + color.hexString,
+        "rgb: " + color.rgbString,
+        "hsl: " + color.hslString,
+      ].join("<br>");
+    });
+      
     Telegram.WebApp.ready();
 
     Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
@@ -29,15 +102,38 @@
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });
-</script>
-<body style="background-color: #ffffff">
-    <div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
-     #000000;">
-        <div id="picker"
-             style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
+  </script>
+  <body>
+    <div class="wrap">
+      <div class="half">
+        <div class="colorPicker"></div>
+      </div>
+      <div class="half readout">
+        <div class="swatchGrid" id="swatch-grid">
+          <div class="swatch" data-color="#ffffff" style="background: #ffffff"></div>
+          <div class="swatch" data-color="#5f2cdd" style="background: #5f2cdd"></div>
+          <div class="swatch" data-color="#752c53" style="background: #752c53"></div>
+          <div class="swatch" data-color="#3b8456" style="background: #3b8456"></div>
+          <div class="swatch" data-color="#a0563d" style="background: #a0563d"></div>
+          <div class="swatch" data-color="#5f5850" style="background: #5f5850"></div>
+          <div class="swatch" data-color="#c3c3c6" style="background: #c3c3c6"></div>
+          <div class="swatch" data-color="#edf145" style="background: #edf1ff"></div>
+          
+          <div class="swatch" data-color="#da3855" style="background: #da3855"></div>
+          <div class="swatch" data-color="#eda541" style="background: #eda541"></div>
+          <div class="swatch" data-color="#f5ea5a" style="background: #f5ea5a"></div>
+          <div class="swatch" data-color="#75b85b" style="background: #75b85b"></div>
+          <div class="swatch" data-color="#66a5d7" style="background: #66a5d7"></div>
+          <div class="swatch" data-color="#817799" style="background: #817799"></div>
+          <div class="swatch" data-color="#e17ea5" style="background: #e17ea5"></div>
+          <div class="swatch" data-color="#f4cdaf" style="background: #f4cdaf"></div>
+        </div>
+        <span class="title">Selected Color:</span>
+        <div id="values"></div>
+      </div>
     </div>
-</body>
-<script type="text/javascript">
+  </body>
+  <script type="text/javascript">
     Telegram.WebApp.expand();
-</script>
+  </script>
 </html>
