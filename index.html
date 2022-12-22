@@ -22,7 +22,7 @@
     colorPicker.on('color:change', function (color) {
         document.body.style.background = color.hexString;
         const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
-        Telegram.WebApp.sendData(data);
+        //Telegram.WebApp.sendData(data);
     });
 
     Telegram.WebApp.MainButton.setText('Rainbows').show().onClick(function () {
