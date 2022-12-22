@@ -140,7 +140,7 @@
     Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
-        Telegram.WebApp.close();
+        //Telegram.WebApp.close();
     });
   </script>
   <script type="text/javascript">
