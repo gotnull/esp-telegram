@@ -24,7 +24,6 @@
           <div class="swatch" data-color="#5f5850" style="background: #5f5850"></div>
           <div class="swatch" data-color="#c3c3c6" style="background: #c3c3c6"></div>
           <div class="swatch" data-color="#edf145" style="background: #edf1ff"></div>
-          
           <div class="swatch" data-color="#da3855" style="background: #da3855"></div>
           <div class="swatch" data-color="#eda541" style="background: #eda541"></div>
           <div class="swatch" data-color="#f5ea5a" style="background: #f5ea5a"></div>
@@ -90,9 +89,6 @@
     }
   </style>
   <script type="text/javascript">
-    // Let Telegram WebApp we're ready
-    Telegram.WebApp.ready();
-
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
     var colorPicker = new iro.ColorPicker(".colorPicker", {
@@ -108,9 +104,10 @@
     var swatchGrid = document.getElementById('swatch-grid');
     swatchGrid.addEventListener('click', function(e) {
       var clickTarget = e.target;
-      // read data-color attribute
+      
+      // Read data-color attribute
       if (clickTarget.dataset.color) {
-        // update the color picker
+        // Update the color picker
         colorPicker.color.set(clickTarget.dataset.color);
         
         // Update the device
@@ -135,6 +132,9 @@
       const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
       Telegram.WebApp.sendData(data);
     });
+
+    // Let Telegram WebApp we're ready
+    Telegram.WebApp.ready();
     
     // Render the MainButton for the Telegram WebApp
     Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
