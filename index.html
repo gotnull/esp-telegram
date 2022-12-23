@@ -90,11 +90,10 @@
     // Let Telegram WebApp know that we're ready
     Telegram.WebApp.ready();
 
-    const initData = Telegram.WebApp.initData || '';
-    const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
+    // const initData = Telegram.WebApp.initData || '';
+    // const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
     
-    //document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
-    document.querySelector('#greeting').innerHTML = JSON.stringify(initDataUnsafe, null, 2); // `Hello, ${initDataUnsafe.user.first_name}`;
+    document.querySelector('#greeting').innerHTML = `Select a Color`;
     
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
@@ -103,25 +102,19 @@
       // Option guide: https://iro.js.org/guide.html#color-picker-options
       width: 650,
       color: "rgb(255, 0, 0)",
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: "#fff",
     });
 
     // Handle click events on the swatch
     var swatchGrid = document.getElementById('swatch-grid');
     swatchGrid.addEventListener('click', function(e) {
-      e.stopPropagation()
-      
       var clickTarget = e.target;
       
       // Read data-color attribute
       if (clickTarget.dataset.color) {
         // Update the color picker
         colorPicker.color.set(clickTarget.dataset.color);
-        
-        // Update the device
-        const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
-        //Telegram.WebApp.sendData(data);
       }
     });
 
@@ -146,8 +139,7 @@
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });
-  </script>
-  <script type="text/javascript">
+
     Telegram.WebApp.expand();
   </script>
 </html>
