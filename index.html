@@ -132,15 +132,13 @@
         "rgb: " + color.rgbString,
         "hsl: " + color.hslString,
       ].join("<br/>");
-      const data = JSON.stringify({ rgb: color.rgb });
-      Telegram.WebApp.sendData(data);
     });
 
-//     Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
-//         const data = JSON.stringify({ rgb: colorPicker.color.rgb });
-//         Telegram.WebApp.sendData(data);
-//         Telegram.WebApp.close();
-//     });
+    Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
+        const data = JSON.stringify({ rgb: colorPicker.color.rgb });
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+    });
 
     Telegram.WebApp.expand();
     Telegram.WebApp.enableClosingConfirmation();
