@@ -92,8 +92,7 @@
 
     // const initData = Telegram.WebApp.initData || '';
     // const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
-    
-    document.querySelector('#greeting').innerHTML = `Select a Color`;
+    // document.querySelector('#greeting').innerHTML = `Select a Color`;
     
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
@@ -134,7 +133,7 @@
     });
 
     // Render the MainButton for the Telegram WebApp
-    Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
+    Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
