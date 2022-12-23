@@ -12,9 +12,7 @@
         <div class="colorPicker"></div>
       </div>
       <div class="half readout">
-        <p>
-          Select a Swatch
-        </p>
+        <p id="greeting"></p>
         <div class="swatchGrid" id="swatch-grid">
           <div class="swatch" data-color="#ffffff" style="background: #ffffff"></div>
           <div class="swatch" data-color="#5f2cdd" style="background: #5f2cdd"></div>
@@ -89,6 +87,11 @@
     }
   </style>
   <script type="text/javascript">
+    const initData = Telegram.WebApp.initData || '';
+    const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
+    
+    document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
+    
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
     var colorPicker = new iro.ColorPicker(".colorPicker", {
