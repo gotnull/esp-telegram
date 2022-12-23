@@ -86,9 +86,12 @@
       color: blue;
     }
   </style>
-  <script type="text/javascript">
-    //const initData = Telegram.WebApp.initData || '';
-    //const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
+  <script type="application/javascript">
+    // Let Telegram WebApp know that we're ready
+    Telegram.WebApp.ready();
+
+    const initData = Telegram.WebApp.initData || '';
+    const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
     
     //document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
     document.querySelector('#greeting').innerHTML = JSON.stringify(initData, null, 2);
@@ -137,9 +140,6 @@
       ].join("<br/>");
     });
 
-    // Let Telegram WebApp know that we're ready
-    Telegram.WebApp.ready();
-    
     // Render the MainButton for the Telegram WebApp
     Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
