@@ -115,7 +115,6 @@
         // Update the color picker
         colorPicker.color.set(clickTarget.dataset.color);
         const data = JSON.stringify({ rgb: colorPicker.color.rgb });
-        alert(data);
         Telegram.WebApp.sendData(data);
       }
     });
@@ -133,13 +132,15 @@
         "rgb: " + color.rgbString,
         "hsl: " + color.hslString,
       ].join("<br/>");
-    });
-
-    Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
         const data = JSON.stringify({ rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
-        Telegram.WebApp.close();
     });
+
+//     Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
+//         const data = JSON.stringify({ rgb: colorPicker.color.rgb });
+//         Telegram.WebApp.sendData(data);
+//         Telegram.WebApp.close();
+//     });
 
     Telegram.WebApp.expand();
     Telegram.WebApp.enableClosingConfirmation();
