@@ -135,12 +135,7 @@
     // Render the MainButton for the Telegram WebApp
     Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
-        // Telegram.WebApp.sendData(data);
-      
-        // web_app_query_id	String (Unique identifier for the query to be answered
-        // result	InlineQueryResult	(A JSON-serialized object describing the message to be sent)
-        Telegram.WebApp.answerWebAppQuery("12345", data);
-      
+        Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });
 
