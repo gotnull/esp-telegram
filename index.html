@@ -94,7 +94,7 @@
     const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
     
     //document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
-    document.querySelector('#greeting').innerHTML = `Hello, ${initDataUnsafe.user.first_name}`;
+    document.querySelector('#greeting').innerHTML = JSON.stringify(initDataUnsafe, null, 2); // `Hello, ${initDataUnsafe.user.first_name}`;
     
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
