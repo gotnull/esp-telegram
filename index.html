@@ -9,10 +9,10 @@
   <body>
     <div class="wrap">
       <div class="half">
+        <p id="greeting"></p>
         <div class="colorPicker"></div>
       </div>
       <div class="half readout">
-        <p id="greeting"></p>
         <div class="swatchGrid" id="swatch-grid">
           <div class="swatch" data-color="#ffffff" style="background: #ffffff"></div>
           <div class="swatch" data-color="#5f2cdd" style="background: #5f2cdd"></div>
@@ -91,7 +91,7 @@
     //const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
     
     //document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
-    document.querySelector('#greeting').innerHTML = 'Hello';
+    document.querySelector('#greeting').innerHTML = JSON.stringify(initData, null, 2);
     
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
