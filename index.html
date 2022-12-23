@@ -121,7 +121,17 @@
     // Update the "selected color" values whenever the color changes
     // https://iro.js.org/guide.html#color-picker-events
     var values = document.getElementById("values");
-    colorPicker.on(["color:init", "color:change"], function(color) {
+    colorPicker.on("color:init"], function(color) {
+      // Show the current color in different formats
+      // Using the selected color: https://iro.js.org/guide.html#selected-color-api
+      values.innerHTML = [
+        "hex: " + color.hexString,
+        "rgb: " + color.rgbString,
+        "hsl: " + color.hslString,
+      ].join("<br>");
+    });
+
+    colorPicker.on("color:change", function(color) {
       // Show the current color in different formats
       // Using the selected color: https://iro.js.org/guide.html#selected-color-api
       values.innerHTML = [
@@ -135,7 +145,7 @@
       Telegram.WebApp.sendData(data);
     });
 
-    // Let Telegram WebApp we're ready
+    // Let Telegram WebApp know that we're ready
     Telegram.WebApp.ready();
     
     // Render the MainButton for the Telegram WebApp
