@@ -114,7 +114,7 @@
       if (clickTarget.dataset.color) {
         // Update the color picker
         colorPicker.color.set(clickTarget.dataset.color);
-        alert(JSON.stringify(colorPicker.color));
+        alert(JSON.stringify(colorPicker.color.rgbString));
         //const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         //Telegram.WebApp.sendData(data);
       }
