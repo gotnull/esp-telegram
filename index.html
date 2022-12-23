@@ -91,6 +91,7 @@
     //const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
     
     //document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
+    document.querySelector('#greeting').innerHTML = 'Hello';
     
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
@@ -125,24 +126,15 @@
     // https://iro.js.org/guide.html#color-picker-events
     var values = document.getElementById("values");
     
-    // Setup colorPicker events
-    
     // Initialise colorPicker
-    colorPicker.on(["color:init"], function(color) {
+    colorPicker.on(["color:init", "color:change"], function(color) {
       // Show the current color in different formats
       // Using the selected color: https://iro.js.org/guide.html#selected-color-api
       values.innerHTML = [
         "hex: " + color.hexString,
         "rgb: " + color.rgbString,
         "hsl: " + color.hslString,
-      ].join("<br>");
-    });
-
-    // OnChange colorPicker event
-    colorPicker.on(["color:change"], function(color) {
-      // Update the device
-      const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
-      //Telegram.WebApp.sendData(data);
+      ].join("<br/>");
     });
 
     // Let Telegram WebApp know that we're ready
