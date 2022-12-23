@@ -132,8 +132,7 @@
       ].join("<br/>");
     });
 
-    // Render the MainButton for the Telegram WebApp
-    Telegram.WebApp.MainButton.setText('Save').show().onClick(function () {
+    Telegram.WebApp.MainButton.setText('Save').show().offClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
