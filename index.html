@@ -87,10 +87,10 @@
     }
   </style>
   <script type="text/javascript">
-    const initData = Telegram.WebApp.initData || '';
-    const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
+    //const initData = Telegram.WebApp.initData || '';
+    //const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
     
-    document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
+    //document.querySelector('#greeting').innerHTML = `Hi, ${initDataUnsafe.user.first_name}!`;
     
     // Create a new color picker instance
     // https://iro.js.org/guide.html#getting-started
@@ -117,7 +117,7 @@
         
         // Update the device
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
-        Telegram.WebApp.sendData(data);
+        //Telegram.WebApp.sendData(data);
       }
     });
 
@@ -142,7 +142,7 @@
     colorPicker.on(["color:change"], function(color) {
       // Update the device
       const data = JSON.stringify({ hex: color.hexString, rgb: color.rgb });
-      Telegram.WebApp.sendData(data);
+      //Telegram.WebApp.sendData(data);
     });
 
     // Let Telegram WebApp know that we're ready
@@ -152,7 +152,7 @@
     Telegram.WebApp.MainButton.setText('Set Color').show().onClick(function () {
         const data = JSON.stringify({ hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb });
         Telegram.WebApp.sendData(data);
-        //Telegram.WebApp.close();
+        Telegram.WebApp.close();
     });
   </script>
   <script type="text/javascript">
