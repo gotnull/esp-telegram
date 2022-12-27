@@ -251,7 +251,7 @@
       if (clickTarget.dataset.pattern) {
         // Update the color picker
         colorPicker.color.set(clickTarget.dataset.pattern);
-        const data = JSON.stringify({ pattern: clickTarget.dataset.pattern });
+        const data = JSON.stringify({ pattern: { data: clickTarget.dataset.pattern } });
         Telegram.WebApp.sendData(data);
       }
     });
