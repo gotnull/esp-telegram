@@ -13,6 +13,17 @@
         <div class="colorPicker"></div>
       </div>
       <div class="half readout">
+        <div class="patternGrid" id="pattern-grid">
+          <div class="pattern" data-color="RAINBOW" style="background-image: linear-gradient(violet, indigo, blue, green, yellow, orange, red);"></div>
+          <div class="pattern" data-color="RAINBOW_WITH_GLITTER" style="background-image: linear-gradient(violet, white, indigo, white, blue, white, green, white, yellow, orange, white, red);"></div>
+          <div class="pattern" data-color="CONFETTI" style="background-image: radial-gradient(#ff8a00, #e52e71);"></div>
+          <div class="pattern" data-color="SINELON" style="background-image: linear-gradient(red, yellow);"></div>
+          <div class="pattern" data-color="BPM" style="background-image: linear-gradient(red, yellow);"></div>
+          <div class="pattern" data-color="JUGGLE" style="background-image: linear-gradient(red, yellow);"></div>
+          <div class="pattern" data-color="NONE" style="background-image: linear-gradient(red, yellow);"></div>
+        </div>
+      </div>
+      <div class="half readout">
         <div class="swatchGrid" id="swatch-grid">
           <div class="swatch" data-color="#330000" style="background:#330000"></div>
           <div class="swatch" data-color="#331900" style="background:#331900"></div>
@@ -183,6 +194,18 @@
       cursor: pointer;
     }
 
+    .patternGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 163px);
+      grid-template-rows: repeat(3, 63px);
+      grid-gap: 10px;
+    }
+
+    .pattern {
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
     a {
       color: blue;
     }
@@ -206,7 +229,7 @@
       borderColor: "#fff",
     });
 
-    // Handle click events on the swatch
+    // Handle click events on the swatches
     var swatchGrid = document.getElementById('swatch-grid');
     swatchGrid.addEventListener('click', function(e) {
       var clickTarget = e.target;
@@ -216,6 +239,20 @@
         // Update the color picker
         colorPicker.color.set(clickTarget.dataset.color);
         const data = JSON.stringify({ rgb: colorPicker.color.rgb });
+        Telegram.WebApp.sendData(data);
+      }
+    });
+    
+    // Handle click events on the patterns
+    var patternGrid = document.getElementById('pattern-grid');
+    patternGrid.addEventListener('click', function(e) {
+      var clickTarget = e.target;
+      
+      // Read data-color attribute
+      if (clickTarget.dataset.pattern) {
+        // Update the color picker
+        colorPicker.color.set(clickTarget.dataset.pattern);
+        const data = JSON.stringify({ pattern: clickTarget.dataset.pattern });
         Telegram.WebApp.sendData(data);
       }
     });
